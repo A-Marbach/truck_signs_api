@@ -8,11 +8,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-for-dev-only")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST': os.environ.get("DB_HOST", "db"),
-        'PORT': int(os.environ.get("DB_PORT", 5432)),
+        'NAME': os.environ.get("DOCKER_DB_NAME"),
+        'USER': os.environ.get("DOCKER_DB_USER"),
+        'PASSWORD': os.environ.get("DOCKER_DB_PASSWORD"),
+        'HOST': os.environ.get("DOCKER_DB_HOST", "db"),
+        'PORT': int(os.environ.get("DOCKER_DB_PORT", 5432)),
     }
 }
 
