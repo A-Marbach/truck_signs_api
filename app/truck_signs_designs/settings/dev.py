@@ -1,14 +1,8 @@
-import environ
 from .base import *
+import os
 
-DEBUG = True
-
-env = environ.Env()
-# reading env file
-environ.Env.read_env()
-
-SECRET_KEY= env("SECRET_KEY")
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True") == "True"
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-for-dev-only")
 
 CORS_ALLOWED_ORIGINS = [
     "https://www.signsfortrucks.com",
@@ -16,27 +10,23 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'NAME': os.environ.get("DB_NAME", "trucksigns"),
+        'USER': os.environ.get("DB_USER", "user"),
+        'PASSWORD': os.environ.get("DB_PASSWORD", "password"),
+        'HOST': os.environ.get("DB_HOST", "db"),
+        'PORT': int(os.environ.get("DB_PORT", 5432)),
     }
 }
 
-STRIPE_PUBLISHABLE_KEY=env("STRIPE_PUBLISHABLE_KEY")
-STRIPE_SECRET_KEY=env("STRIPE_SECRET_KEY")
-
-
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
