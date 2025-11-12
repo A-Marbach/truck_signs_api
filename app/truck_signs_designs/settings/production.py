@@ -1,5 +1,10 @@
 from .base import *
 import os
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env(env_file='/app/.env')
 
 # --- Security ---
 DEBUG = os.environ.get("DEBUG", "False") == "True"
