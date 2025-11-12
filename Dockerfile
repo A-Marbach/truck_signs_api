@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 COPY app /app
-
+COPY .env /app/.env
 EXPOSE 8020
 
 COPY app/entrypoint.sh /entrypoint
